@@ -41,8 +41,8 @@ class FilmeController extends Controller
     }
 
     public function atualizar($id){
-        $filme = Filme::findOrFail($id);  // Buscar o filme pelo ID
-        return view('atualizar', compact('filme')); // Passar o filme para a view de atualização
+        $filme = Filme::findOrFail($id);
+        return view('atualizar', compact('filme')); 
     }
 
     public function update(Request $request, $id){
@@ -54,21 +54,20 @@ class FilmeController extends Controller
             'orcamento' => 'required|numeric',
         ]);
 
-        $filme = Filme::findOrFail($id); // Busca o filme para ser atualizado
+        $filme = Filme::findOrFail($id);
 
-        $filme->titulo = $request->titulo; // Atualizando o campo titulo
-        $filme->dataLancamento = $request->dataLancamento; // Atualizando o campo dataLancamento
-        $filme->sinopse = $request->sinopse; // Atualizando o campo sinopse
-        $filme->genero = $request->genero; // Atualizando o campo genero
-        $filme->orcamento = $request->orcamento; // Atualizando o campo orcamento
-
-        $filme->save(); // Salvando no banco de dados(fazendo update)
+        $filme->titulo = $request->titulo; 
+        $filme->dataLancamento = $request->dataLancamento; 
+        $filme->sinopse = $request->sinopse; 
+        $filme->genero = $request->genero; 
+        $filme->orcamento = $request->orcamento; 
+        $filme->save(); 
         return redirect()->back()->with('success', 'Filme atualizado com sucesso');
     }
     
     public function deletar($id){
-        $filme = Filme::findOrFail($id); // Buscar o filme pelo ID
-        $filme->delete(); // Deletar o filme do banco de dados
+        $filme = Filme::findOrFail($id);
+        $filme->delete(); 
         return redirect()->route('filme.listar')->with('success', 'Filme deletado com sucesso!');
     }
 }

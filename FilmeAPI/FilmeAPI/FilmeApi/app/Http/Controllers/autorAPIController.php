@@ -42,15 +42,14 @@ class AutorApiController extends Controller
             'telefone' => 'required|string|max:20',
         ]);
 
-        $autor = Autor::findOrFail($id); // Busca o autor para ser atualizado
+        $autor = Autor::findOrFail($id);
 
-        $autor->nome = $request->nome; // Atualizando o campo nome
+        $autor->nome = $request->nome;
         $autor->dataNascimento = $request->dataNascimento;
         $autor->email = $request->email;
         $autor->telefone = $request->telefone;
 
-        $autor->save(); // Salvando no banco de dados(fazendo update)
-
+        $autor->save(); 
         return response()->json([
             'message' => "Autor Atualizado!",
             'autor' => $autor
@@ -58,8 +57,8 @@ class AutorApiController extends Controller
     }
 
     public function deletarApi($id){
-        $autor = Autor::findOrFail($id); // Buscar o autor pelo ID
-        $autor->delete(); // Deletar o autor do banco de dados
+        $autor = Autor::findOrFail($id); 
+        $autor->delete(); 
 
         return response()->json([
             'message' => "Autor Deletado com Sucesso!",

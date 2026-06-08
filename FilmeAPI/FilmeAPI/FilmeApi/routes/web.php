@@ -35,7 +35,7 @@ Route::delete('/filme/{id}', [FilmeController::class, 'deletar'])
 // AUTOR
 
 Route::get('/autor/cadastrar', function(){
-    return view('cadastroAutor');
+    return view('autorCadastro');
 })->name('autor.cadastro');
 
 Route::post('/autor/salvar', [AutorController::class, 'add'])

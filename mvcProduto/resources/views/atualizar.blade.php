@@ -13,21 +13,53 @@
         <p style="color: green">{{ session('success') }}</p>
     @endif
 
-    <form action="{{ route('produto.update', $produto->id) }}" method="POST" >
+    <form action="{{ route('produto.update', $produto->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <input type="text" name="nome" value="{{ old('nome', $produto->nome) }}" required>
+        <label for="nome">Nome: </label>
+        <input type="text" name="nome" id="nome" placeholder="Nome..."
+            require value="{{ old('nome', $produto->nome) }}"
+        >
+        <br><br>
+        <label for="quantidade">Quantidade: </label>
+        <input type="number" name="quantidade" id="quantidade" placeholder="Quantidade..."
+            required value="{{ old('quantidade', $produto->quantidade)}}"
+        >
+        <br><br>
+        <label for="valor">Valor: </label>
+        <input type="number" name="valor" id="valor" placeholder="Valor..."
+            required value="{{ old('valor', $produto->valor)}}"
+        >
 
-        <input type="text" name="quantidade" value="{{ old('quantidade', $produto->quantidade) }}" required>
+        <br><br>
+        <label for="setor_id">Setores: </label>
+        <select name="setor_id" id="setor_id">
+            @foreach ($setores as $setor)
+                <option value="{{ $setor->id }}"
+                    {{ $produto->setor_id == $setor->id ? 'selected' : '' }}>
+                    {{ $setor->nome }}
+                </option>
+            @endforeach
+        </select>
 
-        <input type="text" name="preco" value="{{ old('preco', $produto->preco) }}" required>
+        <br><br>
+        <label for="descricao">Descricao: </label>
+        <input type="text" name="descricao" id="descricao" placeholder="Descricao..."
+            required value="{{ old('descricao', $produto->detalhesProdutos->descricao)}}"
+        >
 
-        <input type="text" name="descricao" value="{{ old('descricao', $produto->detalhe?->descricao) }}" required>
+        <br><br>
+        <label for="tamanho">Tamanho: </label>
+        <input type="number" name="tamanho" id="tamanho" placeholder="Tamanho..."
+            required value="{{ old('tamanho', $produto->detalhesProdutos->tamanho)}}"
+        >
 
-        <input type="text" name="tamanho" value="{{ old('tamanho', $produto->detalhe?->tamamho) }}" required>
-
-        <input type="number" name="peso" value="{{ old('peso', $produto->detalhe?->peso) }}" required>
+        <br><br>
+        <label for="peso">Peso: </label>
+        <input type="number" name="peso" id="peso" placeholder="Peso..."
+            required value="{{ old('peso', $produto->detalhesProdutos->peso)}}"
+        >
 
         <button type="submit">Atualizar</button>
     </form>

@@ -1,24 +1,23 @@
 <?php
+// Estou no arquivo Produto.php
 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Produto extends Model{
-
+class Produto extends Model
+{
     protected $fillable = [
         'nome',
         'quantidade',
-        'preco',
-        'setor_id',
-        'detalhes_id'
+        'valor',
+        'setor_id'
     ];
 
     public function setor(){
-        return $this->belongsTo(Setor::class);
+        return $this->belongsTo(Setores::class);
     }
 
-    public function detalhe(){
-        return $this->belongsTo(DetalheProduto::class, 'detalhes_id');
+    public function detalhesProdutos(){
+        return $this->hasOne(DetalheProdutos::class);
     }
 }
